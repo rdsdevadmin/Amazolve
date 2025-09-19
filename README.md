@@ -1,2 +1,2 @@
-# Amazolve
-Amazolve samples and install directory.
+# Amazolve™
+Amazolve™ samples and install directory.
