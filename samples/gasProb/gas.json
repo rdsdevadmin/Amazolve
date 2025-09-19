@@ -1,0 +1,71 @@
+[
+  {
+    "params": {
+      "initializeType": "Random",
+      "mutatorType": "Creep",
+      "maximize": true
+    }
+  },
+  {
+    "atoms": {
+      "resourceCount": 2,
+      "timeCount": 1,
+      "stateCount": 100
+    }
+  },
+  {
+    "constraint": {
+      "CID": "S1",
+      "sumIter": "iterDim",
+      "iterDim": "T",
+      "exprMain": "40 * A(0, t) + 50 * A(1, t)",
+      "iterVars": [
+        "t"
+      ]
+    }
+  },
+  {
+    "constraint": {
+      "CID": "ctMaxTotal",
+      "sumIter": "iterDim",
+      "penaltyVar": "hardPenalty",
+      "iterDim": "T",
+      "exprMain": "IQ(~, A(0, t) + A(1, t), 50)",
+      "iterVars": [
+        "t"
+      ]
+    }
+  },
+  {
+    "constraint": {
+      "CID": "ctMaxTotal2",
+      "sumIter": "iterDim",
+      "penaltyVar": "hardPenalty",
+      "iterDim": "T",
+      "exprMain": "IQ(~, 3 * A(0, t) + 4 * A(1, t), 180)",
+      "iterVars": [
+        "t"
+      ]
+    }
+  },
+  {
+    "constraint": {
+      "CID": "ctMaxChloride",
+      "sumIter": "iterDim",
+      "penaltyVar": "hardPenalty",
+      "iterDim": "T",
+      "exprMain": "IQ(~, A(1, t), 40)",
+      "iterVars": [
+        "t"
+      ]
+    }
+  },
+  {
+    "constants": [
+      {
+        "name": "hardPenalty",
+        "def": -1000
+      }
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "params": {
+      "initializeType": "Unique",
+      "mutatorType": "Swap"
+    }
+  },
+  {
+    "atoms": {
+      "file": "atoms.json"
+    }
+  },
+  {
+    "array": {
+      "name": "cost",
+      "file": "array_cost.json"
+    }
+  },
+  {
+    "constraint": {
+      "CID": "O1",
+      "sumIter": "iterVar",
+      "exprFrom": "0",
+      "exprTo": "T - 1",
+      "iterVars": [ "t" ],
+      "exprMain": "cost(At(t), At(t + 1))"
+    }
+  }
+]

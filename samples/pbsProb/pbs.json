@@ -1,0 +1,139 @@
+[
+  {
+    "params": {
+      "initializeType": "Random",
+      "mutatorType": "Random"
+    }
+  },
+  {
+    "atoms": {
+      "file": "atoms.json"
+    }
+  },
+  {
+    "array": {
+      "name": "cost",
+      "file": "array_cost.json"
+    }
+  },
+  {
+    "array": {
+      "name": "phi",
+      "file": "array_children.json"
+    }
+  },
+  {
+    "array": {
+      "name": "psi",
+      "file": "array_siblings.json"
+    }
+  },
+  {
+    "constraint": {
+      "CID": "C1",
+      "comment": "Constraint #1 - One and only one assignment per part",
+      "penaltyVar": "hardPenalty",
+      "sumIter": "iterDim",
+      "iterDim": "R",
+      "iterVars": [
+        "r"
+      ],
+      "exprMain": "EQ(sum_assigned, 1)",
+      "sums": [
+        {
+          "sumIter": "iterDim",
+          "iterDim": "S",
+          "iterVars": [
+            "i"
+          ],
+          "exprMain": "Xr(r, i)",
+          "resultVar": "sum_assigned"
+        }
+      ]
+    }
+  },
+  {
+    "constraint": {
+      "CID": "C2",
+      "comment": "Constraint #2 - Origin and destination must be different",
+      "penaltyVar": "hardPenalty",
+      "sumIter": "iterArray",
+      "arrayName": "phi",
+      "iterVars": [
+        "r",
+        "s"
+      ],
+      "sums": [
+        {
+          "sumIter": "iterDim",
+          "iterDim": "S",
+          "iterVars": [
+            "i"
+          ],
+          "exprMain": "Xr(r, i) * Xr(s, i)"
+        }
+      ]
+    }
+  },
+  {
+    "constraint": {
+      "CID": "C3",
+      "comment": "Constraint #3 - Origins of two subparts must be different",
+      "penaltyVar": "hardPenalty",
+      "sumIter": "iterArray",
+      "arrayName": "psi",
+      "iterVars": [
+        "r",
+        "s"
+      ],
+      "sums": [
+        {
+          "sumIter": "iterDim",
+          "iterDim": "S",
+          "iterVars": [
+            "i"
+          ],
+          "exprMain": "Xr(r, i) * Xr(s, i)"
+        }
+      ]
+    }
+  },
+  {
+    "constraint": {
+      "CID": "C",
+      "sumIter": "iterArray",
+      "arrayName": "phi",
+      "iterVars": [
+        "r",
+        "s"
+      ],
+      "sums": [
+        {
+          "sumIter": "iterDim",
+          "iterDim": "S",
+          "iterVars": [
+            "i"
+          ],
+          "sums": [
+            {
+              "sumIter": "iterDim",
+              "iterDim": "S",
+              "iterVars": [
+                "j"
+              ],
+              "exprMain": "cost(r, i, j) * Xr(r, i) * Xr(s, j)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "constants": [
+      {
+        "name": "hardPenalty",
+        "def": 10000
+      }
+    ]
+  }
+]
